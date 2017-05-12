@@ -22,7 +22,7 @@ namespace DeploySenderFramework
             var DeployKey = ConfigurationManager.AppSettings["DeployKey"]; //驗證的key
             var ZipName = ConfigurationManager.AppSettings["ZipName"]; //壓縮檔的名稱
             Console.WriteLine("請輸入部署說明：");
-            var DeployDescription = Console.ReadLine();
+            var DeployDescription = Console.ReadLine().Replace(" ", "_");
             Console.WriteLine("部署中...");
 
             DeployProvider provider = new DeployProvider(DeployUri);
