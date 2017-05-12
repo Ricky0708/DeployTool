@@ -27,7 +27,7 @@
 * Client
   * LocalFileFolder：本機要壓縮的資料夾
   * LocalSaveZipFolder：本機暫存要部署的zip檔 (永遠覆蓋zip檔案)
-  * ServerSaveZipFolder：Server要暫存zip檔的資料夾 (在server 端會套上 guid 防止覆蓋，注意自已要定義清理)
+  * ServerSaveZipFolder：Server要暫存zip檔的資料夾 (在server 端會套上 guid 防止覆蓋，注意要定時清理)
   * serverDeployFolder：Server解壓縮zip檔後要發佈的資料夾
   * ZipName：設定zip檔的名稱
   * DeployUri：Server的web api位址
