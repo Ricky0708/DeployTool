@@ -1,5 +1,5 @@
 ﻿using DeployService.Model;
-using DeployService.Service;
+using DeployService.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,11 +21,6 @@ namespace DeployReceiver.Controllers
     {
 
         public static bool OnDeploying = false;
-        private readonly IDeployService _service;
-        public DeployController()
-        {
-            _service = new DeployService.Service.DeployService();
-        }
 
         [HttpPost]
         //[Produces("multipart/form-data")]
@@ -33,23 +28,31 @@ namespace DeployReceiver.Controllers
         {
             try
             {
+                List<_SeqTask> tasks = new List<_SeqTask>() {
+                    new CheckKey(),
+                    new SaveZip(),
+                    new StopWebSite(),
+                    new StopAppPool(),
+                    new Deploy(),
+                    new StartAppPool(),
+                    new StartWebSite(),
+                };
                 Console.WriteLine("------開始部署 " + DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + "------");
                 var provider = Request.Content.ReadAsMultipartAsync<InMemoryMultipartFormDataStreamProvider>(new InMemoryMultipartFormDataStreamProvider()).Result;
-                var model = new ZipModel()
+                var deployContext = new DeployContext()
                 {
                     DeployFolder = provider.FormData.GetValues("DeployFolder")[0],
                     SaveZipFolder = provider.FormData.GetValues("SaveZipFolder")[0],
                     DeployKey = provider.FormData.GetValues("DeployKey")[0],
                     DeployDescription = provider.FormData.GetValues("DeployDescription")[0],
-                    ZipFile = provider.Files[0]
+                    WebSite = ConfigurationManager.AppSettings["WebSite"],
+                    AppPoolName = ConfigurationManager.AppSettings["AppPoolName"],
+                    ZipFileName = (provider.FormData.GetValues("SaveZipFolder")[0] + @"\" +
+                             provider.Files[0].Headers.ContentDisposition.FileName).Replace(@"\\", @"\")
+                            .Replace(".zip", $"_{provider.FormData.GetValues("DeployDescription")[0] + "_" + Guid.NewGuid().ToString()}.zip"),
+                    ZipStream = provider.Files[0].ReadAsStreamAsync().Result,
+                    AllowDeployKey = ConfigurationManager.AppSettings["AllowDeployKey"]
                 };
-
-                if (ConfigurationManager.AppSettings["AllowDeployKey"] != model.DeployKey)
-                {
-                    OnDeploying = false;
-                    Console.WriteLine("拒絕部署");
-                    return "access denied";
-                }
 
                 if (OnDeploying)
                 {
@@ -59,30 +62,12 @@ namespace DeployReceiver.Controllers
                 else
                 {
                     OnDeploying = true;
-                    //儲存歷史發佈檔
-                    var zipFileFullName =
-                        (model.SaveZipFolder + @"\" +
-                        model.ZipFile.Headers.ContentDisposition.FileName).Replace(@"\\", @"\")
-                        .Replace(".zip", $"_{model.DeployDescription + "_" + Guid.NewGuid().ToString()}.zip");
-
-                    var zipStream = model.ZipFile.ReadAsStreamAsync().Result;
-                    Console.WriteLine("儲存Zip");
-                    _service.SaveZipFile(zipStream, zipFileFullName);
-                    Console.WriteLine("停止站台");
-                    _service.StopWebSite(ConfigurationManager.AppSettings["WebSite"]);
-                    Console.WriteLine("停止pool");
-                    _service.StopAppPool(ConfigurationManager.AppSettings["AppPoolName"]);
-                    Console.WriteLine("解壓縮檔案到 " + model.DeployFolder);
-                    _service.Deploy(zipStream, model.DeployFolder);
-                    Console.WriteLine("啟動pool");
-                    _service.StartAppPool(ConfigurationManager.AppSettings["WebSite"]);
-                    Console.WriteLine("啟動站台");
-                    _service.StartWebSite(ConfigurationManager.AppSettings["AppPoolName"]);
-                    Console.WriteLine("部署成功");
-                    Console.WriteLine("");
-                    Console.WriteLine("");
-
+                    foreach (var task in tasks)
+                    {
+                        Console.WriteLine(task.Invoke(deployContext));
+                    }
                     OnDeploying = false;
+                    Console.WriteLine("部署成功");
                     return "部署成功";
                 }
             }

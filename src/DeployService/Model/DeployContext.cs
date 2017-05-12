@@ -9,12 +9,10 @@ using System.Threading.Tasks;
 using System.Web;
 namespace DeployService.Model
 {
-    public class ZipModel
+    public class DeployContext
     {
         //[Required]
         //public IFormFile File { get; set; }
-        [Required]
-        public HttpContent ZipFile { get; set; }
         [Required]
         public string SaveZipFolder { get; set; }
         [Required]
@@ -23,6 +21,12 @@ namespace DeployService.Model
         public string DeployDescription { get; set; }
         [Required]
         public string DeployKey { get; set; }
+        public string WebSite { get; set; }
+        public string AppPoolName { get; set; }
+        public string ZipFileName { get; set; }
+        public Stream ZipStream { get; set; }
+        public string AllowDeployKey { get; set; }
     }
+
 
 }

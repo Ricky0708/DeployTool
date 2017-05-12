@@ -129,11 +129,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\DeployController.cs" />
-    <Compile Include="Model\ZipModel.cs" />
+    <Compile Include="Model\DeployContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\CheckKey.cs" />
+    <Compile Include="Tasks\Deploy.cs" />
+    <Compile Include="Tasks\SaveZip.cs" />
+    <Compile Include="Tasks\StartAppPool.cs" />
+    <Compile Include="Tasks\StartWebSite.cs" />
+    <Compile Include="Tasks\StopAppPool.cs" />
+    <Compile Include="Tasks\_SeqTask.cs" />
     <Compile Include="Service\DeployService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Tasks\StopWebSite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
