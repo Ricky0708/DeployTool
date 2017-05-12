@@ -5,7 +5,7 @@
 
 在覆蓋過程中會停止web site及app pool後，再次啟動。
 
-# 使用環境
+# 環境
 
 * 在 Windows Server 2012 x64 及 PowerShell 50上可以正常使用。
 
