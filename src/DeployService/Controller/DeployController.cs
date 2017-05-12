@@ -28,7 +28,7 @@ namespace DeployReceiver.Controllers
         {
             try
             {
-                List<_SeqTask> tasks = new List<_SeqTask>() {
+                List<ISeqTask> tasks = new List<ISeqTask>() {
                     new CheckKey(),
                     new SaveZip(),
                     new StopWebSite(),

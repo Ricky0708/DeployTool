@@ -13,8 +13,6 @@ namespace DeployService
     {
         static void Main(string[] args)
         {
-     
-
             string baseAddress = ConfigurationManager.AppSettings["ListenUrl"];
             WebApp.Start<Startup>(url: baseAddress);
             Console.ReadLine();

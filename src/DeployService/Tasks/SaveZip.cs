@@ -8,9 +8,9 @@ using System.IO;
 
 namespace DeployService.Tasks
 {
-    public class SaveZip : _SeqTask
+    public class SaveZip : ISeqTask
     {
-        public override string Invoke(DeployContext model)
+        public string Invoke(DeployContext model)
         {
             using (FileStream fs = new FileStream(model.ZipFileName, FileMode.CreateNew))
             {

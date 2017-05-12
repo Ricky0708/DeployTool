@@ -9,9 +9,9 @@ using System.IO;
 
 namespace DeployService.Tasks
 {
-    public class Deploy : _SeqTask
+    public class Deploy : ISeqTask
     {
-        public override string Invoke(DeployContext model)
+        public string Invoke(DeployContext model)
         {
             using (ZipArchive archive = new ZipArchive(model.ZipStream))
             {

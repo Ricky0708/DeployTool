@@ -7,9 +7,9 @@ using DeployService.Model;
 
 namespace DeployService.Tasks
 {
-    public class CheckKey : _SeqTask
+    public class CheckKey : ISeqTask
     {
-        public override string Invoke(DeployContext model)
+        public string Invoke(DeployContext model)
         {
             if (model.AllowDeployKey != model.DeployKey)
             {

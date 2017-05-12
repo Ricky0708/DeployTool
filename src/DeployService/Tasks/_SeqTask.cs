@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace DeployService.Tasks
 {
-    public abstract class _SeqTask
+    public interface ISeqTask
     {
-        protected IOperatorProvider provider = new OperatorProvider();
-
-        public abstract string Invoke(DeployContext model);
+        string Invoke(DeployContext model);
     }
 }

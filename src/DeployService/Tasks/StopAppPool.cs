@@ -1,4 +1,5 @@
 ﻿using DeployService.Model;
+using IISOperator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace DeployService.Tasks
 {
-    public class StopAppPool : _SeqTask
+    public class StopAppPool : ISeqTask
     {
-        public override string Invoke(DeployContext model)
+        private IOperatorProvider provider = new OperatorProvider();
+        public string Invoke(DeployContext model)
         {
             provider.StopAppPool(model.AppPoolName);
             return $"成功停止 {model.AppPoolName} pool";
