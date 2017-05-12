@@ -139,7 +139,6 @@
     <Compile Include="Tasks\StartWebSite.cs" />
     <Compile Include="Tasks\StopAppPool.cs" />
     <Compile Include="Tasks\_SeqTask.cs" />
-    <Compile Include="Service\DeployService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tasks\StopWebSite.cs" />
   </ItemGroup>
