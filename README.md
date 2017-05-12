@@ -5,11 +5,13 @@
 
 在覆蓋過程中會停止web site及app pool後，再次啟動。
 
-# 環境
+# 使用環境
 
-在 Windows Server 2012 x64 及 PowerShell 50上可以正常使用。
+* 在 Windows Server 2012 x64 及 PowerShell 50上可以正常使用。
 
 # How to use
+
+* 在 releaseFile中，已預先編譯好檔案，下載該部份即可。
 
 * 執行主程式前，請先分別設定.Config檔。
   * Client端主程式 『DeploySenderFramework』
