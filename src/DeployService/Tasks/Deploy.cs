@@ -22,7 +22,7 @@ namespace DeployService.Tasks
                     file.ExtractToFile(targetPath, true);
                 }
             }
-            return $"部署成功";
+            return $"Deploy succeed";
         }
     }
 }

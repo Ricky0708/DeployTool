@@ -37,7 +37,7 @@ namespace DeployReceiver.Controllers
                     new StartAppPool(),
                     new StartWebSite(),
                 };
-                Console.WriteLine("------開始部署 " + DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + "------");
+                Console.WriteLine("------Start Deployment " + DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + "------");
                 var provider = Request.Content.ReadAsMultipartAsync<InMemoryMultipartFormDataStreamProvider>(new InMemoryMultipartFormDataStreamProvider()).Result;
                 var deployContext = new DeployContext()
                 {
@@ -56,8 +56,8 @@ namespace DeployReceiver.Controllers
 
                 if (OnDeploying)
                 {
-                    Console.WriteLine("其它項目正在部署中");
-                    return "其它項目正在部署中";
+                    Console.WriteLine("Deploy service is working..");
+                    return "Deploy service is working..";
                 }
                 else
                 {
@@ -67,8 +67,8 @@ namespace DeployReceiver.Controllers
                         Console.WriteLine(task.Invoke(deployContext));
                     }
                     OnDeploying = false;
-                    Console.WriteLine("部署成功");
-                    return "部署成功";
+                    Console.WriteLine("Success");
+                    return "Success";
                 }
             }
             catch (Exception ex)

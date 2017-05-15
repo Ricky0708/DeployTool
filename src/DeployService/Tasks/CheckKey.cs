@@ -13,9 +13,9 @@ namespace DeployService.Tasks
         {
             if (model.AllowDeployKey != model.DeployKey)
             {
-                throw new UnauthorizedAccessException("授權失敗");
+                throw new UnauthorizedAccessException("Unauthorized");
             }
-            return "已授權";
+            return "Authorized";
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Owin;
 using Owin;
 using System.Web.Http;
 using IISOperator;
+using System.Configuration;
 
 [assembly: OwinStartup(typeof(DeployService.Startup))]
 
@@ -25,7 +26,8 @@ namespace DeployService
             defaults: new { id = RouteParameter.Optional }
             );
             app.UseWebApi(config);
-            Console.WriteLine("System started");
+
+            Console.WriteLine($"Delpoyment service is listening on: {ConfigurationManager.AppSettings["ListenUrl"]}");
         }
     }
 }

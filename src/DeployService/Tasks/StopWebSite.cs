@@ -14,7 +14,7 @@ namespace DeployService.Tasks
         public string Invoke(DeployContext model)
         {
             provider.StopWebSite(model.WebSite);
-            return $"成功停止站台 {model.WebSite}";
+            return $"Stop website {model.WebSite} succeed";
 
         }
     }

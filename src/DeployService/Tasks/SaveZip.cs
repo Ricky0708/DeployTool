@@ -17,7 +17,7 @@ namespace DeployService.Tasks
                 model.ZipStream.CopyTo(fs);
                 fs.Flush();
             };
-            return $"成功儲存 Zip檔為『{model.ZipFileName}』";
+            return $"Zip has been save to 『{model.ZipFileName}』";
         }
     }
 }

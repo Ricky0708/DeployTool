@@ -21,9 +21,9 @@ namespace DeploySenderFramework
             var DeployUri = ConfigurationManager.AppSettings["DeployUri"]; //部署的api位置
             var DeployKey = ConfigurationManager.AppSettings["DeployKey"]; //驗證的key
             var ZipName = ConfigurationManager.AppSettings["ZipName"]; //壓縮檔的名稱
-            Console.WriteLine("請輸入部署說明：");
+            Console.WriteLine("Enter doploy description：");
             var DeployDescription = Console.ReadLine().Replace(" ", "_");
-            Console.WriteLine("部署中...");
+            Console.WriteLine("Deploying...");
 
             DeployProvider provider = new DeployProvider(DeployUri);
 

@@ -14,7 +14,7 @@ namespace DeployService.Tasks
         public string Invoke(DeployContext model)
         {
             provider.StartWebSite(model.WebSite);
-            return $"成功啟動站台 {model.WebSite}";
+            return $"Start website {model.WebSite} succeed";
         }
     }
 }
