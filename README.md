@@ -25,17 +25,25 @@
 # Config Setting
 
 * Client
-  * LocalFileFolder：本機要壓縮的資料夾
-  * LocalSaveZipFolder：本機暫存要部署的zip檔 (永遠覆蓋zip檔案)
-  * ServerSaveZipFolder：Server要暫存zip檔的資料夾 (在server 端會套上 guid 防止覆蓋，注意自已要定義清理)
-  * serverDeployFolder：Server解壓縮zip檔後要發佈的資料夾
-  * ZipName：設定zip檔的名稱
-  * DeployUri：Server的web api位址
-  * DeployKey：金鑰，必需與server端的一致
-  * DeleteFiles_BeforeZip：壓縮時要排除的檔案
+
+|Name                 |Description                                                           |
+|---------------------|----------------------------------------------------------------------|
+|LocalFileFolder      |本機要壓縮的資料夾                                                      |
+|LocalSaveZipFolder   |本機暫存要部署的zip檔 (永遠覆蓋zip檔案)                                  |
+|ServerSaveZipFolder  |Server要暫存zip檔的資料夾 (在server 端會套上 guid 防止覆蓋，注意要定時清理)|
+|ServerDeployFolder   |Server解壓縮zip檔後要發佈的資料夾                                        |
+|ZipName              |設定zip檔的名稱                                                        |
+|DeployUri            |Server的web api位址                                                    |
+|DeployKey            |金鑰，必需與server端的一致                                              |
+|DeleteFiles_BeforeZip|壓縮時要排除的檔案                                                      |
+
+
 * Server
-  * WebSite：佈署前先停止及部署後啟動的 Web Site
-  * AppPoolName：佈署前先停止及部署後啟動的 App Pool
-  * AllowDeployKey：金鑰，必需與client端的一致
-  * ListenUrl：要監聽的 url
+
+|Name                 |Description                                                           |
+|---------------------|----------------------------------------------------------------------|
+|WebSite              |佈署前先停止及部署後啟動的 Web Site                                      |
+|AppPoolName          |佈署前先停止及部署後啟動的 App Pool                                     |
+|AllowDeployKey       |金鑰，必需與client端的一致                                              |
+|ListenUrl            |要監聽的 url                                                           |
 
