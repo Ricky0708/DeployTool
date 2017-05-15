@@ -14,7 +14,7 @@ namespace DeployService.Tasks
         public string Invoke(DeployContext model)
         {
             provider.StartAppPool(model.AppPoolName);
-            return $"Start {model.AppPoolName} pool succeed";
+            return $"Start app pool {model.AppPoolName} succeed";
         }
     }
 }
