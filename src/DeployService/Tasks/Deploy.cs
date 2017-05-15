@@ -17,9 +17,30 @@ namespace DeployService.Tasks
             {
                 foreach (var file in archive.Entries)
                 {
-                    string targetPath = Path.Combine(model.DeployFolder, file.FullName);
-                    Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
-                    file.ExtractToFile(targetPath, true);
+                    int count = 0;
+                    while (true)
+                    {
+                        count += 1;
+                        try
+                        {
+                            string targetPath = Path.Combine(model.DeployFolder, file.FullName);
+                            Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
+                            file.ExtractToFile(targetPath, true);
+                            count = 0;
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            if (count > 5)
+                            {
+                                throw ex;
+                            }
+                            else
+                            {
+                                System.Threading.Thread.Sleep(1000);
+                            }
+                        }
+                    }
                 }
             }
             return $"Deploy succeed";
