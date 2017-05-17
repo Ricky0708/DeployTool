@@ -13,8 +13,28 @@ namespace DeployService.Tasks
         private IOperatorProvider provider = new OperatorProvider();
         public string Invoke(DeployContext model)
         {
-            provider.StartWebSite(model.WebSite);
-            return $"Start website {model.WebSite} succeed";
+            int count = 0;
+            while (true)
+            {
+                count += 1;
+                try
+                {
+                    provider.StartWebSite(model.WebSite);
+                    count = 0;
+                    return $"Start website {model.WebSite} succeed";
+                }
+                catch (Exception ex)
+                {
+                    if (count > 5)
+                    {
+                        throw ex;
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                    }
+                }
+            }
         }
     }
 }

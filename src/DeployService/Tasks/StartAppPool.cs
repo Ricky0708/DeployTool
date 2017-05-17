@@ -13,8 +13,30 @@ namespace DeployService.Tasks
         private IOperatorProvider provider = new OperatorProvider();
         public string Invoke(DeployContext model)
         {
-            provider.StartAppPool(model.AppPoolName);
-            return $"Start app pool {model.AppPoolName} succeed";
+     
+
+            int count = 0;
+            while (true)
+            {
+                count += 1;
+                try
+                {
+                    provider.StartAppPool(model.AppPoolName);
+                    count = 0;
+                    return $"Start app pool {model.AppPoolName} succeed";
+                }
+                catch (Exception ex)
+                {
+                    if (count > 5)
+                    {
+                        throw ex;
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                    }
+                }
+            }
         }
     }
 }
