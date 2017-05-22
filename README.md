@@ -47,3 +47,14 @@
 |AllowDeployKey       |金鑰，必需與client端的一致                                              |
 |ListenUrl            |要監聽的 url                                                           |
 
+# Version History
+
+* DeploySenderFramework
+  * 1.0.0
+    <br>發佈
+
+* DeployService
+  * 1.0.1
+    <br>發佈Pool、WebSite 啟動失敗，重試次數5次，每次間隔2秒
+  * 1.0.0
+    <br>發佈發佈
