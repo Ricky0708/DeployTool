@@ -74,7 +74,7 @@ namespace DeployReceiver.Controllers
             catch (Exception ex)
             {
                 OnDeploying = false;
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message + "\r\n" + ex.StackTrace);
                 return ex.Message;
             }
         }

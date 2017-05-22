@@ -33,7 +33,7 @@ namespace DeployService.Tasks
                     }
                     else
                     {
-                        System.Threading.Thread.Sleep(1000);
+                        System.Threading.Thread.Sleep(2000);
                     }
                 }
             }
